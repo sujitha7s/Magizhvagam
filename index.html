@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magizhvagam — For every life, a better tomorrow.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0B2545;
+    --blue-deep: #123A6B;
+    --blue-mid: #1C63B7;
+    --blue-sky: #4F97D6;
+    --blue-pale: #E7F0FA;
+    --paper: #F7FAFD;
+    --white: #FFFFFF;
+    --ink: #0E2038;
+    --muted: #587195;
+    --line: rgba(11,37,69,0.12);
+    --shadow: 0 20px 50px -25px rgba(11,37,69,0.35);
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{ font-family:'Fraunces', serif; color:var(--navy); font-weight:600; letter-spacing:-0.01em; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+  section{ position:relative; }
+  ::selection{ background:var(--blue-sky); color:#fff; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ---------- scroll progress ---------- */
+  .progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg, var(--blue-mid), var(--blue-sky));
+    z-index:999; transition:width 0.1s linear;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:900;
+    background:rgba(247,250,253,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  header.scrolled{ border-color:var(--line); box-shadow:0 8px 30px -20px rgba(11,37,69,0.4); }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1160px; margin:0 auto; padding:14px 32px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand img{ height:34px; width:auto; }
+  .brand span{ font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; color:var(--navy); }
+  .nav-links{ display:flex; gap:34px; list-style:none; }
+  .nav-links a{
+    font-size:0.9rem; font-weight:500; color:var(--blue-deep); position:relative; padding:4px 0;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0%;
+    background:var(--blue-mid); transition:width .3s var(--ease);
+  }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{
+    background:var(--navy); color:#fff !important; padding:9px 20px; border-radius:100px;
+    font-weight:600; font-size:0.85rem; transition:transform .25s var(--ease), background .25s;
+  }
+  .nav-cta:hover{ background:var(--blue-mid); transform:translateY(-2px); }
+  .nav-cta::after{ display:none; }
+  .burger{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh; display:flex; align-items:center; position:relative;
+    padding:140px 0 80px;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% 10%, rgba(79,151,214,0.16), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 5% 90%, rgba(28,99,183,0.10), transparent 60%),
+      var(--paper);
+    overflow:hidden;
+  }
+  .hero-path{
+    position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;
+  }
+  .hero-path path{
+    fill:none; stroke:url(#pathGrad); stroke-width:2; stroke-linecap:round;
+    stroke-dasharray:2400; stroke-dashoffset:2400;
+    animation:draw 2.6s var(--ease) 0.3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .hero-inner{ position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--blue-mid);
+    background:var(--blue-pale); padding:7px 14px; border-radius:100px; margin-bottom:24px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--blue-mid); }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4rem); line-height:1.05; color:var(--navy); margin-bottom:22px;
+  }
+  .hero h1 em{ font-style:italic; color:var(--blue-mid); font-weight:500; }
+  .hero p.lead{ font-size:1.15rem; color:var(--muted); max-width:52ch; margin-bottom:36px; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:100px;
+    font-weight:600; font-size:0.95rem; transition:transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{ background:var(--navy); color:#fff; }
+  .btn-primary:hover{ transform:translateY(-3px); box-shadow:var(--shadow); background:var(--blue-mid); }
+  .btn-ghost{ border-color:var(--line); color:var(--navy); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--blue-mid); color:var(--blue-mid); transform:translateY(-3px); }
+
+  .hero-stats{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; max-width:420px;
+  }
+  .stat{ padding:18px 20px; background:var(--white); border:1px solid var(--line); border-radius:16px; }
+  .stat .num{ font-family:'Fraunces', serif; font-size:1.8rem; color:var(--navy); font-weight:600; }
+  .stat .label{ font-size:0.8rem; color:var(--muted); margin-top:2px; }
+
+  .hero-mark{
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .hero-mark-card{
+    background:var(--white); border:1px solid var(--line); border-radius:28px; padding:48px 36px;
+    box-shadow:var(--shadow); text-align:center; position:relative;
+  }
+  .hero-mark-card img{ width:210px; margin:0 auto 18px; }
+  .hero-mark-card p{ font-size:0.95rem; color:var(--muted); font-style:italic; }
+
+  /* ---------- reveal utility ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-stagger > *{ opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease), transform .7s var(--ease); }
+  .reveal-stagger.in > *{ opacity:1; transform:translateY(0); }
+  .reveal-stagger.in > *:nth-child(1){ transition-delay:0.05s; }
+  .reveal-stagger.in > *:nth-child(2){ transition-delay:0.15s; }
+  .reveal-stagger.in > *:nth-child(3){ transition-delay:0.25s; }
+  .reveal-stagger.in > *:nth-child(4){ transition-delay:0.35s; }
+
+  /* ---------- section heads ---------- */
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--blue-mid); margin-bottom:14px; display:block;
+  }
+  .section-head h2{ font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:16px; }
+  .section-head p{ color:var(--muted); font-size:1.05rem; }
+
+  section.pad{ padding:120px 0; }
+  .divider{
+    height:1px; background:linear-gradient(90deg, transparent, var(--line), transparent);
+    max-width:1160px; margin:0 auto;
+  }
+
+  /* ---------- about ---------- */
+  .about{ background:var(--white); }
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:80px; }
+  .about-grid p{ color:var(--muted); font-size:1.05rem; }
+  .about-grid .quote{
+    font-family:'Fraunces', serif; font-style:italic; font-size:1.4rem; color:var(--navy);
+    line-height:1.5; border-left:3px solid var(--blue-mid); padding-left:24px;
+  }
+
+  .mv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-bottom:90px; }
+  .mv-card{
+    background:var(--blue-pale); border-radius:22px; padding:38px 34px; position:relative; overflow:hidden;
+  }
+  .mv-card::before{
+    content:''; position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%;
+    background:rgba(28,99,183,0.10);
+  }
+  .mv-card h3{ font-size:1.3rem; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .mv-card h3 svg{ width:22px; height:22px; }
+  .mv-card p{ color:var(--muted); position:relative; z-index:1; }
+
+  .founders{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .founder-card{
+    border:1px solid var(--line); border-radius:22px; padding:34px; background:var(--paper);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+  }
+  .founder-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent; }
+  .founder-avatar{
+    width:60px; height:60px; border-radius:50%; background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif;
+    font-size:1.3rem; margin-bottom:18px;
+  }
+  .founder-card h4{ font-size:1.15rem; margin-bottom:2px; }
+  .founder-role{ font-size:0.82rem; color:var(--blue-mid); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; display:block; }
+  .founder-card .bio{ color:var(--muted); font-size:0.95rem; font-style:italic; }
+  .bio-edit-tag{
+    display:inline-block; margin-top:14px; font-size:0.72rem; font-weight:600; color:var(--blue-mid);
+    background:var(--blue-pale); padding:4px 10px; border-radius:100px; font-style:normal;
+  }
+
+  /* ---------- programs ---------- */
+  .programs{ background:var(--paper); }
+  .program{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;
+    padding:56px 0; border-bottom:1px solid var(--line);
+  }
+  .program:last-child{ border-bottom:none; }
+  .program:nth-child(even) .program-media{ order:2; }
+  .program-media{ position:relative; border-radius:22px; overflow:hidden; box-shadow:var(--shadow); }
+  .program-media img{ width:100%; height:320px; object-fit:cover; transition:transform .6s var(--ease); }
+  .program-media:hover img{ transform:scale(1.06); }
+  .program-num{
+    font-family:'Fraunces', serif; font-size:0.95rem; color:var(--blue-mid); font-weight:600;
+    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .program-num .ln{ width:36px; height:1px; background:var(--blue-mid); }
+  .program h3{ font-size:1.7rem; margin-bottom:14px; }
+  .program p{ color:var(--muted); margin-bottom:18px; }
+  .program-meta{ display:flex; gap:14px; flex-wrap:wrap; }
+  .chip{
+    font-size:0.78rem; font-weight:600; color:var(--blue-deep); background:var(--blue-pale);
+    padding:6px 14px; border-radius:100px;
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery{ background:var(--white); }
+  .gallery-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:150px; gap:14px;
+  }
+  .gallery-grid figure{
+    position:relative; overflow:hidden; border-radius:16px; background:var(--blue-pale);
+    cursor:pointer;
+  }
+  .gallery-grid figure img{
+    width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease), filter .6s var(--ease);
+  }
+  .gallery-grid figure:hover img{ transform:scale(1.08); }
+  .gallery-grid figure.big{ grid-column:span 2; grid-row:span 2; }
+  .gallery-grid figure.placeholder{
+    display:flex; align-items:center; justify-content:center; color:var(--blue-mid);
+    font-size:0.82rem; font-weight:600; text-align:center; padding:10px; border:1.5px dashed var(--blue-sky);
+  }
+  .gallery-grid figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:14px; font-size:0.78rem; color:#fff;
+    background:linear-gradient(0deg, rgba(11,37,69,0.75), transparent);
+    opacity:0; transition:opacity .3s var(--ease);
+  }
+  .gallery-grid figure:hover figcaption{ opacity:1; }
+
+  /* ---------- donate ---------- */
+  .donate{
+    background:linear-gradient(135deg, var(--navy), var(--blue-deep) 55%, var(--blue-mid));
+    color:#fff; padding:110px 0; position:relative; overflow:hidden;
+  }
+  .donate::before{
+    content:''; position:absolute; width:600px; height:600px; border-radius:50%;
+    border:1px solid rgba(255,255,255,0.08); top:-300px; right:-160px;
+  }
+  .donate::after{
+    content:''; position:absolute; width:420px; height:420px; border-radius:50%;
+    border:1px solid rgba(255,255,255,0.08); bottom:-260px; left:-120px;
+  }
+  .donate-inner{ position:relative; z-index:1; display:grid; grid-template-columns:1.2fr 0.8fr; gap:50px; align-items:center; }
+  .donate h2{ color:#fff; font-size:clamp(1.9rem,3.6vw,2.6rem); margin-bottom:16px; }
+  .donate p{ color:rgba(255,255,255,0.78); font-size:1.05rem; max-width:48ch; }
+  .donate-card{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:22px;
+    padding:34px; backdrop-filter:blur(6px);
+  }
+  .donate-card .amt-row{ display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .amt{
+    flex:1; min-width:80px; text-align:center; padding:12px 0; border-radius:12px;
+    border:1px solid rgba(255,255,255,0.22); font-weight:600; font-size:0.9rem; color:#fff;
+    cursor:pointer; transition:background .25s, border-color .25s;
+  }
+  .amt:hover, .amt.active{ background:rgba(255,255,255,0.16); border-color:#fff; }
+  .btn-donate{
+    width:100%; background:#fff; color:var(--navy); padding:15px; border-radius:14px; font-weight:700;
+    font-size:1rem; text-align:center; transition:transform .25s var(--ease), box-shadow .25s;
+    display:block; cursor:pointer;
+  }
+  .btn-donate:hover{ transform:translateY(-3px); box-shadow:0 20px 40px -18px rgba(0,0,0,0.5); }
+  .donate-note{ font-size:0.78rem; color:rgba(255,255,255,0.6); margin-top:14px; text-align:center; }
+
+  /* ---------- contact / footer ---------- */
+  footer{ background:var(--navy); color:rgba(255,255,255,0.85); padding:80px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 0.8fr 0.9fr; gap:50px; margin-bottom:60px; }
+  .footer-brand{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .footer-brand img{ height:38px; filter:brightness(0) invert(1); }
+  .footer-brand span{ font-family:'Fraunces',serif; font-size:1.2rem; color:#fff; font-weight:600; }
+  footer .tag{ color:rgba(255,255,255,0.55); font-size:0.95rem; max-width:34ch; }
+  footer h5{ color:#fff; font-family:'Work Sans',sans-serif; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; font-weight:600; }
+  footer ul{ list-style:none; }
+  footer ul li{ margin-bottom:12px; }
+  footer ul a{ color:rgba(255,255,255,0.7); font-size:0.95rem; transition:color .25s; }
+  footer ul a:hover{ color:#fff; }
+  .social-row{ display:flex; gap:12px; margin-top:6px; }
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,0.25);
+    display:flex; align-items:center; justify-content:center; transition:background .25s, border-color .25s, transform .25s;
+  }
+  .social-row a:hover{ background:rgba(255,255,255,0.12); border-color:rgba(255,255,255,0.5); transform:translateY(-3px); }
+  .social-row svg{ width:17px; height:17px; }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.14); padding-top:26px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-size:0.82rem; color:rgba(255,255,255,0.5);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .hero-mark{ order:-1; margin-bottom:20px; }
+    .hero-mark-card img{ width:150px; }
+    .about-grid, .mv-grid, .founders{ grid-template-columns:1fr; }
+    .program, .program:nth-child(even) .program-media{ grid-template-columns:1fr; order:0; }
+    .donate-inner{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; gap:36px; }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid figure.big{ grid-column:span 2; grid-row:span 1; height:220px; }
+    .nav-links{ display:none; }
+  }
+  @media (max-width: 560px){
+    section.pad{ padding:80px 0; }
+    .wrap{ padding:0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header id="siteHeader">
+  <nav>
+    <div class="brand">
+      <img src="assets/logo.jpg" alt="Magizhvagam logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#donate" class="nav-cta">Donate</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <svg class="hero-path" viewBox="0 0 1200 800" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="pathGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1C63B7" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#4F97D6" stop-opacity="0.15"/>
+      </linearGradient>
+    </defs>
+    <path d="M -50 650 C 200 700, 350 500, 550 520 C 750 540, 780 320, 1000 280 C 1150 250, 1180 180, 1260 100" />
+  </svg>
+  <div class="wrap hero-inner">
+    <div class="reveal in" style="transition-delay:.1s">
+      <span class="eyebrow"><span class="dot"></span> A non-profit built on guidance &amp; growth</span>
+      <h1>For every life,<br><em>a better tomorrow.</em></h1>
+      <p class="lead">Magizhvagam brings quality career guidance, personal development, and community-led change to students and communities who rarely get access to it — one school, one initiative at a time.</p>
+      <div class="hero-actions">
+        <a href="#programs" class="btn btn-primary">See our programs</a>
+        <a href="#donate" class="btn btn-ghost">Support our work</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">520+</div><div class="label">Students at our first partner school</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">Active community initiatives</div></div>
+      </div>
+    </div>
+    <div class="hero-mark reveal in" style="transition-delay:.25s">
+      <div class="hero-mark-card">
+        <img src="assets/logo.jpg" alt="Magizhvagam — மகிழ்வகம்">
+        <p>"ஒவ்வொரு உயிருக்கும் ஒரு சிறந்த நாளை"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about pad" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">About us</span>
+      <h2>Clarity and support, for every student.</h2>
+    </div>
+
+    <div class="about-grid reveal">
+      <p>Magizhvagam is a non-profit organisation working to make quality career guidance and personal development support accessible to students in government and under-resourced schools — many of whom otherwise never get access to structured counselling. We believe every child deserves clarity about their strengths, their options, and their future, regardless of their school's resources.</p>
+      <p class="quote">"Every individual and community, valued, supported, and given the opportunity to thrive — with dignity, well-being, and hope."</p>
+    </div>
+
+    <div class="mv-grid reveal-stagger">
+      <div class="mv-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#1C63B7" stroke-width="2"><path d="M12 2 L14.5 8.5 L21 9.3 L16 14 L17.3 20.5 L12 17 L6.7 20.5 L8 14 L3 9.3 L9.5 8.5 Z"/></svg> Our Mission</h3>
+        <p>To drive measurable and meaningful social change through impactful initiatives centred on education, environmental sustainability, and community development. By combining compassionate action with evidence-based, community-led approaches, we strive to create long-term impact — visible in transformed lives, empowered communities, and measurable, sustainable outcomes. Alongside our core focus areas, we undertake diverse social welfare initiatives that address evolving community needs.</p>
+      </div>
+      <div class="mv-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#1C63B7" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12c2-4 6-7 10-7s8 3 10 7c-2 4-6 7-10 7s-8-3-10-7Z"/></svg> Our Vision</h3>
+        <p>To build a compassionate and inclusive society where every individual and community is valued, supported, and given the opportunity to thrive with dignity, well-being, and hope — free from neglect and inequality.</p>
+      </div>
+    </div>
+
+    <div class="section-head reveal">
+      <span class="kicker">The team behind Magizhvagam</span>
+      <h2>Founders</h2>
+    </div>
+    <div class="founders reveal-stagger">
+      <div class="founder-card">
+        <div class="founder-avatar">A</div>
+        <h4>Ajayhritik</h4>
+        <span class="founder-role">Founder</span>
+        <p class="bio">Bio coming soon — this space is reserved for Ajayhritik's story and role at Magizhvagam.</p>
+        <span class="bio-edit-tag">Editable field</span>
+      </div>
+      <div class="founder-card">
+        <div class="founder-avatar">K</div>
+        <h4>Krithika M U</h4>
+        <span class="founder-role">Co-Founder</span>
+        <p class="bio">Bio coming soon — this space is reserved for Krithika's story and role at Magizhvagam.</p>
+        <span class="bio-edit-tag">Editable field</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGRAMS ================= -->
+<section class="programs pad" id="programs">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Programs &amp; Initiatives</span>
+      <h2>Where our work is happening.</h2>
+      <p>Each initiative starts with a real, specific need — a room, a session, an afternoon — and builds outward from there.</p>
+    </div>
+
+    <div class="program reveal">
+      <div class="program-media"><img src="assets/library-room.png" alt="Library room being set up at Thanthai Periyar Government School"></div>
+      <div>
+        <div class="program-num"><span class="ln"></span>Initiative 01</div>
+        <h3>Project Aadhyam</h3>
+        <p>Setting up a vibrant library and upgrading infrastructure at Thanthai Periyar Government School, Puzhuthivakkam — home to more than 520 bright students. We're creating a comfortable, inspiring space that fosters a lifelong love of reading, with sturdy library racks, four ceiling fans, four LED tube lights, and window installations for the computer lab. We're also expanding the library room with more storage racks and a growing book collection.</p>
+        <div class="program-meta">
+          <span class="chip">520+ students</span>
+          <span class="chip">Est. budget ₹74,500</span>
+          <span class="chip">Puzhuthivakkam</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="program reveal">
+      <div class="program-media"><img src="assets/tree-planting.jpeg" alt="Tree planting during Project Puvi"></div>
+      <div>
+        <div class="program-num"><span class="ln"></span>Initiative 02</div>
+        <h3>Project Puvi</h3>
+        <p>Conducted at Thanthai Periyar Government School, Project Puvi brought 11th and 12th grade students together to learn about current environmental issues and sustainable living, encouraging them to become responsible environmental stewards. A "Save Earth" drawing competition engaged middle schoolers with creativity and thoughtful ideas on protecting our planet, with certificates for all participants and medals for the winners. The programme closed with a tree-planting initiative — a shared commitment to preserving the environment for generations to come.</p>
+        <div class="program-meta">
+          <span class="chip">Environmental awareness</span>
+          <span class="chip">Drawing competition</span>
+          <span class="chip">Tree planting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="program reveal">
+      <div class="program-media"><img src="assets/yoga-day.jpg" alt="Yoga and meditation workshop at Akshaya Trust"></div>
+      <div>
+        <div class="program-num"><span class="ln"></span>Initiative 03</div>
+        <h3>Yoga &amp; Meditation for Akshaya Trust</h3>
+        <p>On International Yoga Day, the Magizhvagam team had the privilege of conducting a meditation and yoga workshop for the elderly residents of Akshaya Trust, Velappanchavadi. Our heartfelt thanks to Mr. Hemanth J for leading the yoga session with dedication and care, and to Mr. Ajayhritik for guiding residents through a calming, mindful meditation. At Magizhvagam, we believe wellness and inner peace are for all ages — it was a joy spending this special day promoting health, mindfulness, and happiness with the residents.</p>
+        <div class="program-meta">
+          <span class="chip">Akshaya Trust, Velappanchavadi</span>
+          <span class="chip">International Yoga Day</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="gallery pad" id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Gallery</span>
+      <h2>Moments from the field.</h2>
+      <p>A growing collection of photos from our initiatives — more will be added here as new work happens.</p>
+    </div>
+    <div class="gallery-grid reveal-stagger">
+      <figure class="big"><img src="assets/library-room.png" alt="Library room, Project Aadhyam"><figcaption>Project Aadhyam — library room</figcaption></figure>
+      <figure><img src="assets/tree-planting.jpeg" alt="Project Puvi tree planting"><figcaption>Project Puvi</figcaption></figure>
+      <figure><img src="assets/yoga-day.jpg" alt="Yoga day at Akshaya Trust"><figcaption>Yoga &amp; meditation day</figcaption></figure>
+      <figure class="placeholder">More photos coming soon</figure>
+      <figure class="placeholder">More photos coming soon</figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DONATE ================= -->
+<section class="donate" id="donate">
+  <div class="wrap donate-inner">
+    <div class="reveal">
+      <h2>Your contribution builds the next room, the next session, the next chance.</h2>
+      <p>Every rupee goes directly into initiatives like Project Aadhyam and Project Puvi. Reach out to us to contribute — our online payment option is being set up and will appear here shortly.</p>
+    </div>
+    <div class="donate-card reveal">
+      <div class="amt-row">
+        <div class="amt">₹500</div>
+        <div class="amt active">₹1,500</div>
+        <div class="amt">₹5,000</div>
+      </div>
+      <a href="mailto:magizhvagam.tem@gmail.com?subject=I'd%20like%20to%20donate%20to%20Magizhvagam" class="btn-donate">Donate now</a>
+      <p class="donate-note">Payment gateway / QR coming soon — for now, this reaches us directly by email.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT / FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.jpg" alt="Magizhvagam logo">
+        </div>
+        <p class="tag">For every life, a better tomorrow. A community-led non-profit working across education, environment, and well-being.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#donate">Donate</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get in touch</h5>
+        <ul>
+          <li><a href="mailto:magizhvagam.tem@gmail.com">magizhvagam.tem@gmail.com</a></li>
+        </ul>
+        <div class="social-row">
+          <a href="https://www.instagram.com/magizhvagam._" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/magizhvagam" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><line x1="7" y1="10" x2="7" y2="17"/><circle cx="7" cy="6.5" r="1"/><path d="M11 17v-4.5a2.5 2.5 0 0 1 5 0V17"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Magizhvagam. All rights reserved.</span>
+      <span>Made with care, for every life.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header shadow on scroll
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = pct + '%';
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // donation amount chips
+  document.querySelectorAll('.amt').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.amt').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
