@@ -82,7 +82,14 @@
   }
   .nav-cta:hover{ background:var(--blue-mid); transform:translateY(-2px); }
   .nav-cta::after{ display:none; }
-  .burger{ display:none; }
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .nav-toggle span{
+    display:block; width:22px; height:2px; background:var(--navy); margin:5px 0;
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+  }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
   /* ---------- hero ---------- */
   .hero{
@@ -207,6 +214,11 @@
     display:inline-block; margin-top:14px; font-size:0.72rem; font-weight:600; color:var(--blue-mid);
     background:var(--blue-pale); padding:4px 10px; border-radius:100px; font-style:normal;
   }
+  .message-box{
+    border:1.5px dashed var(--blue-sky); border-radius:14px; background:var(--blue-pale);
+    padding:26px 20px; text-align:center; margin-top:4px;
+  }
+  .message-box .bio{ color:var(--blue-mid); font-weight:600; font-size:0.95rem; letter-spacing:0.02em; margin:0; }
 
   /* ---------- programs ---------- */
   .programs{ background:var(--paper); }
@@ -256,6 +268,14 @@
     opacity:0; transition:opacity .3s var(--ease);
   }
   .gallery-grid figure:hover figcaption{ opacity:1; }
+  .gallery-group{ margin-bottom:64px; }
+  .gallery-group:last-child{ margin-bottom:0; }
+  .gallery-group-title{
+    font-size:1.15rem; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--line);
+  }
+  .gallery-grid-sm{ grid-auto-rows:180px; }
+  .gallery-grid-sm figure.big{ grid-column:span 2; grid-row:span 1; }
+  .gallery-grid-sm figure.placeholder{ grid-column:span 2; }
 
   /* ---------- donate ---------- */
   .donate{
@@ -327,7 +347,17 @@
     .footer-grid{ grid-template-columns:1fr; gap:36px; }
     .gallery-grid{ grid-template-columns:repeat(2,1fr); }
     .gallery-grid figure.big{ grid-column:span 2; grid-row:span 1; height:220px; }
-    .nav-links{ display:none; }
+    .gallery-grid-sm figure.placeholder{ grid-column:span 2; }
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0; background:var(--white); flex-direction:column;
+      gap:0; padding:10px 0; border-bottom:1px solid var(--line); box-shadow:0 20px 30px -25px rgba(11,37,69,0.3);
+      transform:translateY(-130%); opacity:0; transition:transform .35s var(--ease), opacity .35s var(--ease);
+      pointer-events:none;
+    }
+    .nav-links.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
+    .nav-links a{ padding:14px 32px; width:100%; }
+    .nav-links a::after{ display:none; }
+    .nav-toggle{ display:block; }
   }
   @media (max-width: 560px){
     section.pad{ padding:80px 0; }
@@ -342,9 +372,10 @@
 <header id="siteHeader">
   <nav>
     <div class="brand">
-      <img src="assets/logo.jpg" alt="Magizhvagam logo">
+      <img src="assets/logo-new.png" alt="Magizhvagam logo">
     </div>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#programs">Programs</a></li>
@@ -368,7 +399,7 @@
   </svg>
   <div class="wrap hero-inner">
     <div class="reveal in" style="transition-delay:.1s">
-      <span class="eyebrow"><span class="dot"></span> A non-profit organization built on guidance &amp; growth</span>
+      <span class="eyebrow"><span class="dot"></span> A non-profit built on guidance &amp; growth</span>
       <h1>For every life,<br><em>a better tomorrow.</em></h1>
       <p class="lead">Magizhvagam brings quality career guidance, personal development, and community-led change to students and communities who rarely get access to it — one school, one initiative at a time.</p>
       <div class="hero-actions">
@@ -382,7 +413,7 @@
     </div>
     <div class="hero-mark reveal in" style="transition-delay:.25s">
       <div class="hero-mark-card">
-        <img src="assets/logo.jpg" alt="Magizhvagam — மகிழ்வகம்">
+        <img src="assets/logo-new.png" alt="Magizhvagam — மகிழ்வகம்">
         <p>"ஒவ்வொரு உயிருக்கும் ஒரு சிறந்த நாளை"</p>
       </div>
     </div>
@@ -415,23 +446,25 @@
 
     <div class="section-head reveal">
       <span class="kicker">The team behind Magizhvagam</span>
-      <h2>Founders</h2>
+      <h2>A message to society</h2>
     </div>
     <div class="founders reveal-stagger">
-      <div class="founder-card">
+      <div class="founder-card message-card">
         <div class="founder-avatar">A</div>
         <h4>Ajayhritik</h4>
         <span class="founder-role">Founder</span>
-        <p class="bio">Ajayhritik is an author, speaker, and social contributor with a keen interest in mindfulness, personal development, and sustainable living. Since 2019, he has been conducting meditation and self-awareness sessions, encouraging individuals to develop greater clarity, resilience, and emotional well-being.
-His journey has provided opportunities to interact with distinguished spiritual and cultural leaders, including some of the world renowned masters, enriching his perspective on leadership, ethics, and human values.
-He is the author of The Holy Thoughts of Spiritual Incense. His work reflects a commitment to community service, environmental responsibility, and inspiring positive change through practical values and conscious living.</p>
+        <div class="message-box">
+          <p class="bio">Coming soon</p>
+        </div>
         <span class="bio-edit-tag">Editable field</span>
       </div>
-      <div class="founder-card">
+      <div class="founder-card message-card">
         <div class="founder-avatar">K</div>
         <h4>Krithika M U</h4>
         <span class="founder-role">Co-Founder</span>
-        <p class="bio">Bio coming soon — this space is reserved for Krithika's story and role at Magizhvagam.</p>
+        <div class="message-box">
+          <p class="bio">Coming soon</p>
+        </div>
         <span class="bio-edit-tag">Editable field</span>
       </div>
     </div>
@@ -498,13 +531,43 @@ He is the author of The Holy Thoughts of Spiritual Incense. His work reflects a 
       <h2>Moments from the field.</h2>
       <p>A growing collection of photos from our initiatives — more will be added here as new work happens.</p>
     </div>
-    <div class="gallery-grid reveal-stagger">
-      <figure class="big"><img src="assets/library-room.png" alt="Library room, Project Aadhyam"><figcaption>Project Aadhyam — library room</figcaption></figure>
-      <figure><img src="assets/tree-planting.jpeg" alt="Project Puvi tree planting"><figcaption>Project Puvi</figcaption></figure>
-      <figure><img src="assets/yoga-day.jpg" alt="Yoga day at Akshaya Trust"><figcaption>Yoga &amp; meditation day</figcaption></figure>
-      <figure class="placeholder">More photos coming soon</figure>
-      <figure class="placeholder">More photos coming soon</figure>
+
+    <div class="gallery-group reveal">
+      <h3 class="gallery-group-title">Project Aadhyam</h3>
+      <div class="gallery-grid gallery-grid-sm reveal-stagger">
+        <figure class="big"><img src="assets/library-room.png" alt="Library room, Project Aadhyam"><figcaption>Project Aadhyam — library room</figcaption></figure>
+        <figure class="placeholder">More photos coming soon</figure>
+      </div>
     </div>
+
+    <div class="gallery-group reveal">
+      <h3 class="gallery-group-title">Project Puvi</h3>
+      <div class="gallery-grid reveal-stagger">
+        <figure class="big"><img src="assets/puvi-01.jpg" alt="Environmental awareness session, Project Puvi"><figcaption>Environmental awareness session</figcaption></figure>
+        <figure><img src="assets/puvi-02.jpg" alt="Environmental awareness session in classroom"><figcaption>Project Puvi — classroom session</figcaption></figure>
+        <figure><img src="assets/puvi-03.jpg" alt="Save Earth drawing competition"><figcaption>Save Earth drawing competition</figcaption></figure>
+        <figure><img src="assets/puvi-04.jpg" alt="Students during Project Puvi session"><figcaption>Sustainable living session</figcaption></figure>
+        <figure><img src="assets/puvi-05.jpg" alt="Magizhvagam team with school staff"><figcaption>With our school partners</figcaption></figure>
+        <figure><img src="assets/puvi-06.jpg" alt="Certificate presented to a drawing competition winner"><figcaption>Certificate presentation</figcaption></figure>
+        <figure><img src="assets/puvi-07.jpg" alt="Tree planting during Project Puvi"><figcaption>Tree-planting initiative</figcaption></figure>
+        <figure><img src="assets/tree-planting.jpeg" alt="Project Puvi tree planting"><figcaption>Tree-planting initiative</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="gallery-group reveal">
+      <h3 class="gallery-group-title">Yoga &amp; Meditation — Akshaya Trust</h3>
+      <div class="gallery-grid reveal-stagger">
+        <figure class="big"><img src="assets/yoga-day.jpg" alt="Yoga day at Akshaya Trust"><figcaption>Yoga &amp; meditation day</figcaption></figure>
+        <figure><img src="assets/akshaya-01.jpg" alt="Volunteer speaking to Akshaya Trust residents"><figcaption>Meditation session</figcaption></figure>
+        <figure><img src="assets/akshaya-02.jpg" alt="Volunteers addressing Akshaya Trust residents"><figcaption>Welcoming the residents</figcaption></figure>
+        <figure><img src="assets/akshaya-03.jpg" alt="Akshaya Trust residents seated for the session"><figcaption>Akshaya Trust, Velappanchavadi</figcaption></figure>
+        <figure><img src="assets/akshaya-04.jpg" alt="Elderly residents at Akshaya Trust"><figcaption>Wellness for all ages</figcaption></figure>
+        <figure><img src="assets/akshaya-05.jpg" alt="Volunteers leading the wellness session"><figcaption>Guiding the session</figcaption></figure>
+        <figure><img src="assets/akshaya-06.jpg" alt="Magizhvagam volunteer team at Akshaya Trust"><figcaption>Our volunteer team</figcaption></figure>
+        <figure><img src="assets/akshaya-07.jpg" alt="Residents doing a yoga stretch"><figcaption>Yoga stretch, together</figcaption></figure>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -533,7 +596,7 @@ He is the author of The Holy Thoughts of Spiritual Incense. His work reflects a 
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="assets/logo.jpg" alt="Magizhvagam logo">
+          <img src="assets/logo-new.png" alt="Magizhvagam logo">
         </div>
         <p class="tag">For every life, a better tomorrow. A community-led non-profit working across education, environment, and well-being.</p>
       </div>
@@ -578,6 +641,22 @@ He is the author of The Holy Thoughts of Spiritual Incense. His work reflects a 
     const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
     progress.style.width = pct + '%';
   });
+
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  }
 
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
