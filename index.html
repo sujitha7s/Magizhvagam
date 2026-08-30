@@ -203,18 +203,13 @@
   }
   .founder-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent; }
   .founder-avatar{
-    width:64px; height:64px; border-radius:50%; background:var(--navy); color:#fff;
+    width:120px; height:120px; border-radius:18px; background:var(--navy); color:#fff;
     display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif;
-    font-size:1.3rem; margin-bottom:18px; overflow:hidden; border:2px solid var(--white); box-shadow:0 4px 14px -6px rgba(11,37,69,0.4);
+    font-size:1.3rem; margin-bottom:18px; overflow:hidden; border:3px solid var(--white); box-shadow:0 6px 18px -8px rgba(11,37,69,0.45);
   }
   .founder-avatar img{ width:100%; height:100%; object-fit:cover; }
-  .founder-card h4{ font-size:1.15rem; margin-bottom:2px; }
-  .founder-role{ font-size:0.82rem; color:var(--blue-mid); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; display:block; }
+  .founder-card h4{ font-size:1.15rem; margin-bottom:14px; }
   .founder-card .bio{ color:var(--muted); font-size:0.95rem; font-style:italic; }
-  .bio-edit-tag{
-    display:inline-block; margin-top:14px; font-size:0.72rem; font-weight:600; color:var(--blue-mid);
-    background:var(--blue-pale); padding:4px 10px; border-radius:100px; font-style:normal;
-  }
   .message-box{
     border-left:3px solid var(--blue-mid); border-radius:10px; background:var(--blue-pale);
     padding:22px 22px; text-align:left; margin-top:4px;
@@ -356,7 +351,9 @@
     .donate-inner{ grid-template-columns:1fr; }
     .footer-grid{ grid-template-columns:1fr; gap:36px; }
     .gallery-grid{ grid-template-columns:repeat(2,1fr); }
-    .gallery-grid figure.big{ grid-column:span 2; grid-row:span 1; height:220px; }
+    .gallery-grid figure.big{ grid-column:span 2; grid-row:span 2; }
+    .gallery-grid-sm{ grid-auto-rows:170px; }
+    .gallery-grid-sm figure.big{ grid-column:span 2; grid-row:span 1; height:auto; }
     .gallery-grid-sm figure.placeholder{ grid-column:span 2; }
     .nav-links{
       position:fixed; top:64px; left:0; right:0; background:var(--white); flex-direction:column;
@@ -462,7 +459,6 @@
       <div class="founder-card message-card">
         <div class="founder-avatar"><img src="assets/ajayhritik.jpg" alt="Ajayhritik"></div>
         <h4>Ajayhritik</h4>
-        <span class="founder-role">Founder</span>
         <div class="message-box">
           <p class="bio">At Magizhvagam, we believe compassion is not an option — it is a way of life. In a world that often rushes past pain, choosing to care is a powerful act.
 
@@ -472,18 +468,15 @@ Social service is not about recognition; it is about responsibility. When we ser
 
 Let us build a world where compassion is natural, mindfulness is constant, and service is shared by all.</p>
         </div>
-        <span class="bio-edit-tag">Editable field</span>
       </div>
       <div class="founder-card message-card">
         <div class="founder-avatar"><img src="assets/krithika.jpg" alt="Krithika M U"></div>
         <h4>Krithika M U</h4>
-        <span class="founder-role">Co-Founder</span>
         <div class="message-box">
           <p class="bio">For generations, we have been promised something comforting: "Do good, and good things will come back to you." But at Magizhvagam, we reject that exchange. We don't give to receive. We don't serve to balance a cosmic scale. Our pulse beats for a deeper, more intense purpose: to do good just to bring a smile to a forgotten face and to break down how they view the world.
 
 We are not just a group; we are a collective of passionate individuals united by a single, burning vision. We aim to create a future where every living being, from the largest life to the tiniest creature, can enjoy the dignity of a better tomorrow.</p>
         </div>
-        <span class="bio-edit-tag">Editable field</span>
       </div>
     </div>
   </div>
