@@ -130,48 +130,15 @@ The repository contains the main website files in the root directory, making it 
 
 The website can be expanded with additional features such as:
 
-* 📞 Contact Us page
 * 🤝 Volunteer registration
-* 💝 Donation system
+* 💝 Donation system - Payment gateway / QR code
 * 📅 Events and activities section
 * 📝 Blog / News section
-* 📱 Social media integration
-* 📧 Contact form
 * 🗺️ Organization location and map
 * 👥 Volunteer and team profiles
 * 📊 Impact statistics
 * 🌐 Tamil and English language support
 * 🔗 Custom `.org` domain
-
----
-
-## 🤝 Contributing
-
-Contributions and suggestions are welcome.
-
-If you would like to contribute:
-
-1. Fork the repository.
-2. Create a new branch.
-
-```bash
-git checkout -b feature/your-feature
-```
-
-3. Make your changes.
-4. Commit your changes.
-
-```bash
-git commit -m "Add new feature"
-```
-
-5. Push the branch.
-
-```bash
-git push origin feature/your-feature
-```
-
-6. Open a Pull Request.
 
 ---
 
