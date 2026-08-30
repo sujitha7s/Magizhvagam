@@ -591,8 +591,8 @@ We are not just a group; we are a collective of passionate individuals united by
         <div class="amt active">₹500</div>
         <div class="amt">₹1,000</div>
       </div>
-      <a href="mailto:magizhvagam.tem@gmail.com?subject=I'd%20like%20to%20donate%20to%20Magizhvagam" class="btn-donate">Donate now</a>
-      <p class="donate-note">Payment gateway / QR coming soon — for now, this reaches us directly by email.</p>
+      <a href="mailto:magizhvagam.tem@gmail.com?subject=I'd%20like%20to%20donate%20to%20Magizhvagam" class="btn-donate" id="donateBtn">Donate now</a>
+      <p class="donate-note" id="donateNote">Payment gateway / QR coming soon — for now, this reaches us directly by email.</p>
     </div>
   </div>
 </section>
@@ -684,6 +684,22 @@ We are not just a group; we are a collective of passionate individuals united by
       el.classList.add('active');
     });
   });
+
+  // donate button: mailto + clipboard fallback (some desktops have no default mail app configured)
+  const donateBtn = document.getElementById('donateBtn');
+  const donateNote = document.getElementById('donateNote');
+  if(donateBtn && donateNote){
+    const originalNote = donateNote.textContent;
+    donateBtn.addEventListener('click', () => {
+      const email = 'magizhvagam.tem@gmail.com';
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(() => {
+          donateNote.textContent = 'Opening your email app… if nothing happens, our address (' + email + ') is copied — paste it into Gmail, Outlook, or any email service.';
+          setTimeout(() => { donateNote.textContent = originalNote; }, 6000);
+        }).catch(() => {});
+      }
+    });
+  }
 </script>
 </body>
 </html>
