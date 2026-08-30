@@ -110,7 +110,15 @@
     animation:draw 2.6s var(--ease) 0.3s forwards;
   }
   @keyframes draw{ to{ stroke-dashoffset:0; } }
-  .hero-inner{ position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center; }
+  .hero-inner{
+    position:relative; z-index:1; display:grid;
+    grid-template-columns:1.15fr 0.85fr; grid-template-rows:auto auto;
+    grid-template-areas: "text card" "text stats";
+    column-gap:60px; row-gap:24px; align-items:start;
+  }
+  .hero-text{ grid-area:text; align-self:center; }
+  .hero-card{ grid-area:card; display:flex; align-items:center; justify-content:center; }
+  .hero-stats{ grid-area:stats; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; font-weight:600;
     letter-spacing:0.08em; text-transform:uppercase; color:var(--blue-mid);
@@ -134,15 +142,12 @@
   .btn-ghost:hover{ border-color:var(--blue-mid); color:var(--blue-mid); transform:translateY(-3px); }
 
   .hero-stats{
-    display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; max-width:420px;
+    display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:420px; width:100%;
   }
   .stat{ padding:18px 20px; background:var(--white); border:1px solid var(--line); border-radius:16px; }
   .stat .num{ font-family:'Fraunces', serif; font-size:1.8rem; color:var(--navy); font-weight:600; }
   .stat .label{ font-size:0.8rem; color:var(--muted); margin-top:2px; }
 
-  .hero-mark{
-    position:relative; display:flex; align-items:center; justify-content:center;
-  }
   .hero-mark-card{
     background:var(--white); border:1px solid var(--line); border-radius:28px; padding:48px 36px;
     box-shadow:var(--shadow); text-align:center; position:relative;
@@ -343,9 +348,14 @@
 
   /* ---------- responsive ---------- */
   @media (max-width: 900px){
-    .hero-inner{ grid-template-columns:1fr; }
-    .hero-mark{ order:-1; margin-bottom:20px; }
+    .hero-inner{
+      grid-template-columns:1fr; grid-template-rows:auto auto auto;
+      grid-template-areas: "text" "card" "stats";
+      row-gap:28px;
+    }
+    .hero-card{ margin-bottom:0; }
     .hero-mark-card img{ width:150px; }
+    .hero-stats{ max-width:none; }
     .about-grid, .mv-grid, .founders{ grid-template-columns:1fr; }
     .program, .program:nth-child(even) .program-media{ grid-template-columns:1fr; order:0; }
     .donate-inner{ grid-template-columns:1fr; }
@@ -405,24 +415,24 @@
     <path d="M -50 650 C 200 700, 350 500, 550 520 C 750 540, 780 320, 1000 280 C 1150 250, 1180 180, 1260 100" />
   </svg>
   <div class="wrap hero-inner">
-    <div class="reveal in" style="transition-delay:.1s">
+    <div class="hero-text reveal in" style="transition-delay:.1s">
       <span class="eyebrow"><span class="dot"></span> A non-profit built on guidance &amp; growth</span>
       <h1>For every life,<br><em>a better tomorrow.</em></h1>
-      <p class="lead">Magizhvagam brings quality career guidance, personal development, and community-led change to students and communities who rarely get access to it — one school, one initiative at a time.</p>
+      <p class="lead">Every individual and community, valued, supported, and given the opportunity to thrive — with dignity, well-being, and hope.</p>
       <div class="hero-actions">
         <a href="#programs" class="btn btn-primary">See our programs</a>
         <a href="#donate" class="btn btn-ghost">Support our work</a>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="num">520+</div><div class="label">Students at our first partner school</div></div>
-        <div class="stat"><div class="num">3</div><div class="label">Community initiatives, past &amp; upcoming</div></div>
-      </div>
     </div>
-    <div class="hero-mark reveal in" style="transition-delay:.25s">
+    <div class="hero-card reveal in" style="transition-delay:.25s">
       <div class="hero-mark-card">
         <img src="assets/logo-new.png" alt="Magizhvagam — மகிழ்வகம்">
         <p>"ஒவ்வொரு உயிருக்கும் ஒரு சிறந்த நாளை"</p>
       </div>
+    </div>
+    <div class="hero-stats reveal in" style="transition-delay:.35s">
+      <div class="stat"><div class="num">520+</div><div class="label">Students at our first partner school</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">Community initiatives, past &amp; upcoming</div></div>
     </div>
   </div>
 </section>
@@ -430,17 +440,10 @@
 <!-- ================= ABOUT ================= -->
 <section class="about pad" id="about">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="kicker">About us</span>
-      <h2>Clarity and support, for every student.</h2>
-    </div>
 
-    <div class="about-grid reveal">
-      <p>Magizhvagam is a non-profit organisation working to make quality career guidance and personal development support accessible to students in government and under-resourced schools — many of whom otherwise never get access to structured counselling. We believe every child deserves clarity about their strengths, their options, and their future, regardless of their school's resources.</p>
-      <p class="quote">"Every individual and community, valued, supported, and given the opportunity to thrive — with dignity, well-being, and hope."</p>
-    </div>
+    <span class="kicker reveal in" style="display:block; margin-bottom:24px;">About us</span>
 
-    <div class="mv-grid reveal-stagger">
+    <div class="mv-grid reveal-stagger" style="margin-top:0;">
       <div class="mv-card">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="#1C63B7" stroke-width="2"><path d="M12 2 L14.5 8.5 L21 9.3 L16 14 L17.3 20.5 L12 17 L6.7 20.5 L8 14 L3 9.3 L9.5 8.5 Z"/></svg> Our Mission</h3>
         <p>To drive measurable and meaningful social change through impactful initiatives centred on education, environmental sustainability, and community development. By combining compassionate action with evidence-based, community-led approaches, we strive to create long-term impact — visible in transformed lives, empowered communities, and measurable, sustainable outcomes. Alongside our core focus areas, we undertake diverse social welfare initiatives that address evolving community needs.</p>
