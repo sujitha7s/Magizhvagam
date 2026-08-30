@@ -203,10 +203,11 @@
   }
   .founder-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); border-color:transparent; }
   .founder-avatar{
-    width:60px; height:60px; border-radius:50%; background:var(--navy); color:#fff;
+    width:64px; height:64px; border-radius:50%; background:var(--navy); color:#fff;
     display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif;
-    font-size:1.3rem; margin-bottom:18px;
+    font-size:1.3rem; margin-bottom:18px; overflow:hidden; border:2px solid var(--white); box-shadow:0 4px 14px -6px rgba(11,37,69,0.4);
   }
+  .founder-avatar img{ width:100%; height:100%; object-fit:cover; }
   .founder-card h4{ font-size:1.15rem; margin-bottom:2px; }
   .founder-role{ font-size:0.82rem; color:var(--blue-mid); font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; display:block; }
   .founder-card .bio{ color:var(--muted); font-size:0.95rem; font-style:italic; }
@@ -215,10 +216,14 @@
     background:var(--blue-pale); padding:4px 10px; border-radius:100px; font-style:normal;
   }
   .message-box{
-    border:1.5px dashed var(--blue-sky); border-radius:14px; background:var(--blue-pale);
-    padding:26px 20px; text-align:center; margin-top:4px;
+    border-left:3px solid var(--blue-mid); border-radius:10px; background:var(--blue-pale);
+    padding:22px 22px; text-align:left; margin-top:4px;
   }
-  .message-box .bio{ color:var(--blue-mid); font-weight:600; font-size:0.95rem; letter-spacing:0.02em; margin:0; }
+  .message-box .bio{
+    color:var(--ink); font-weight:400; font-style:italic; font-size:0.92rem; line-height:1.7; margin:0;
+    white-space:pre-line;
+  }
+
 
   /* ---------- programs ---------- */
   .programs{ background:var(--paper); }
@@ -404,7 +409,7 @@
   </svg>
   <div class="wrap hero-inner">
     <div class="reveal in" style="transition-delay:.1s">
-      <span class="eyebrow"><span class="dot"></span> A non-profit organisation built on guidance &amp; growth</span>
+      <span class="eyebrow"><span class="dot"></span> A non-profit built on guidance &amp; growth</span>
       <h1>For every life,<br><em>a better tomorrow.</em></h1>
       <p class="lead">Magizhvagam brings quality career guidance, personal development, and community-led change to students and communities who rarely get access to it — one school, one initiative at a time.</p>
       <div class="hero-actions">
@@ -413,7 +418,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="num">520+</div><div class="label">Students at our first partner school</div></div>
-        <div class="stat"><div class="num">3</div><div class="label">Community initiatives — past &amp; upcoming</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">Community initiatives, past &amp; upcoming</div></div>
       </div>
     </div>
     <div class="hero-mark reveal in" style="transition-delay:.25s">
@@ -455,18 +460,30 @@
     </div>
     <div class="founders reveal-stagger">
       <div class="founder-card message-card">
-        <div class="founder-avatar">A</div>
+        <div class="founder-avatar"><img src="assets/ajayhritik.jpg" alt="Ajayhritik"></div>
         <h4>Ajayhritik</h4>
+        <span class="founder-role">Founder</span>
         <div class="message-box">
-          <p class="bio">Coming soon</p> 
+          <p class="bio">At Magizhvagam, we believe compassion is not an option — it is a way of life. In a world that often rushes past pain, choosing to care is a powerful act.
+
+Mindfulness helps us pause, see, and truly understand the lives around us. It reminds us that even the smallest act of kindness can bring light into someone's darkness.
+
+Social service is not about recognition; it is about responsibility. When we serve with genuine intention, we don't just help others — we transform ourselves and the society we live in.
+
+Let us build a world where compassion is natural, mindfulness is constant, and service is shared by all.</p>
         </div>
+        <span class="bio-edit-tag">Editable field</span>
       </div>
       <div class="founder-card message-card">
-        <div class="founder-avatar">K</div>
+        <div class="founder-avatar"><img src="assets/krithika.jpg" alt="Krithika M U"></div>
         <h4>Krithika M U</h4>
+        <span class="founder-role">Co-Founder</span>
         <div class="message-box">
-          <p class="bio">Coming soon</p>
+          <p class="bio">For generations, we have been promised something comforting: "Do good, and good things will come back to you." But at Magizhvagam, we reject that exchange. We don't give to receive. We don't serve to balance a cosmic scale. Our pulse beats for a deeper, more intense purpose: to do good just to bring a smile to a forgotten face and to break down how they view the world.
+
+We are not just a group; we are a collective of passionate individuals united by a single, burning vision. We aim to create a future where every living being, from the largest life to the tiniest creature, can enjoy the dignity of a better tomorrow.</p>
         </div>
+        <span class="bio-edit-tag">Editable field</span>
       </div>
     </div>
   </div>
@@ -482,7 +499,7 @@
     </div>
 
     <div class="program reveal">
-      <div class="program-media"><img src="assets/tree-planting.jpeg" alt="Tree planting during Project Puvi"></div>
+      <div class="program-media"><img src="assets/puvi-05.jpg" alt="Magizhvagam team with Thanthai Periyar Government School staff"></div>
       <div>
         <div class="program-num"><span class="ln"></span>Initiative 01</div>
         <h3>Project Puvi</h3>
@@ -550,10 +567,10 @@
     <div class="gallery-group reveal">
       <h3 class="gallery-group-title">Yoga &amp; Meditation — Akshaya Trust</h3>
       <div class="gallery-grid reveal-stagger">
-        <figure class="big"><img src="assets/yoga-day.jpg" alt="Yoga day at Akshaya Trust"><figcaption>Akshaya Trust, Velappanchavadi</figcaption></figure>
+        <figure class="big"><img src="assets/yoga-day.jpg" alt="Yoga day at Akshaya Trust"><figcaption>Yoga &amp; meditation day</figcaption></figure>
         <figure><img src="assets/akshaya-01.jpg" alt="Volunteer speaking to Akshaya Trust residents"><figcaption>Meditation session</figcaption></figure>
         <figure><img src="assets/akshaya-02.jpg" alt="Volunteers addressing Akshaya Trust residents"><figcaption>Welcoming the residents</figcaption></figure>
-        <figure><img src="assets/akshaya-03.jpg" alt="Akshaya Trust residents seated for the session"><figcaption>Small exercises</figcaption></figure>
+        <figure><img src="assets/akshaya-03.jpg" alt="Akshaya Trust residents seated for the session"><figcaption>Akshaya Trust, Velappanchavadi</figcaption></figure>
         <figure><img src="assets/akshaya-04.jpg" alt="Elderly residents at Akshaya Trust"><figcaption>Wellness for all ages</figcaption></figure>
         <figure><img src="assets/akshaya-05.jpg" alt="Volunteers leading the wellness session"><figcaption>Guiding the session</figcaption></figure>
         <figure><img src="assets/akshaya-06.jpg" alt="Magizhvagam volunteer team at Akshaya Trust"><figcaption>Our volunteer team</figcaption></figure>
@@ -573,9 +590,9 @@
     </div>
     <div class="donate-card reveal">
       <div class="amt-row">
-        <div class="amt">₹100</div>
-        <div class="amt active">₹500</div>
-        <div class="amt">₹1,000</div>
+        <div class="amt">₹500</div>
+        <div class="amt active">₹1,500</div>
+        <div class="amt">₹5,000</div>
       </div>
       <a href="mailto:magizhvagam.tem@gmail.com?subject=I'd%20like%20to%20donate%20to%20Magizhvagam" class="btn-donate">Donate now</a>
       <p class="donate-note">Payment gateway / QR coming soon — for now, this reaches us directly by email.</p>
